@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Description" content="Desenvolvimento de jogos e realidade virtual" />
+    <meta name="Keywords" content="realidade virtual, criamos jogos, desenvolvemos jogos" />
+    <title>GlobalGames | @ViewData["Title"]</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="logo">
+                <h1><span class="destaque">Global</span> Games Enterprise</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li id="home"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li id="sobre"><a asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a></li>
+                    <li id="servicos"><a asp-area="" asp-controller="Home" asp-action="Servicos">Serviços</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section id="showcase">
+        <div class="container">
+            <h1>A melhor plataforma de realidade virtual</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi cupiditate repellendus nemo iste libero tenetur nesciunt ullam, iusto voluptatum eum fugit numquam nam perspiciatis ut, deserunt earum sapiente illum alias dolor. Dolore commodi rerum quas sint illum saepe iure, soluta, totam, accusamus impedit voluptatem obcaecati nam cupiditate eveniet ducimus nobis.</p>
+        </div>
+    </section>
+
+    <partial name="_Newsletter"/>
+
+    @RenderBody()
+
+<footer>
+    <!--se isto fosse comentado seria
+    <p>Global Games, Todos os direitos reservados &copy; CET50 @@DateTime.Now.Year</p>-->
+    <p>Global Games, Todos os direitos reservados &copy; CET50 @DateTime.Now.Year</p>
+</footer>
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>
