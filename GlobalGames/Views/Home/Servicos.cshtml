@@ -1,55 +1,58 @@
-﻿@{
-    ViewData["Title"] = "Serviços";
-}
+﻿@model GlobalGames.Dados.Entidades.Orcamento;
 
-<section id="main">
-    <div class="container">
-        <article id="main-col">
-            <h1 class="titulo">Serviços</h1>
-            <ul id="servicos">
-                <li>
-                    <h3>Jogos Unity</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima nulla consequuntur adipisci atque illo, cumque placeat, exercitationem qui harum deserunt, ab quae! Est necessitatibus vero quisquam similique placeat.</p>
-                    <p>Preços: 1000&euro; - 3000&euro;</p>
-                </li>
-                <li>
-                    <h3>Unreal Engine</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima nulla consequuntur adipisci atque illo, cumque placeat, exercitationem qui harum deserunt, ab quae! Est necessitatibus vero quisquam similique placeat.</p>
-                    <p>Preços: 1000&euro; - 3000&euro;</p>
-                </li>
-                <li>
-                    <h3>Personagens</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima nulla consequuntur adipisci atque illo, cumque placeat, exercitationem qui harum deserunt, ab quae! Est necessitatibus vero quisquam similique placeat.</p>
-                    <p>Preços: 1000&euro; - 3000&euro;</p>
-                </li>
-            </ul>
-        </article>
+    @{
+        ViewData["Title"] = "Serviços";
+    }
 
-        <aside id="sidebar">
-            <div class="dark">
-                <h3>Peça um orçamento</h3>
-                <form action="" class="orcamento">
-                    <div>
-                        <label>Nome</label><br>
-                        <input type="text" placeholder="Nome">
-                    </div>
-                    <div>
-                        <label>Email</label><br>
-                        <input type="email" placeholder="Endereço de email">
-                    </div>
-                    <div>
-                        <label>Mensagem</label><br>
-                        <textarea placeholder="Mensagem"></textarea>
-                    </div>
-                    <button class="button_1" type="submit">Enviar</button>
-                </form>
-            </div>
-        </aside>
-    </div>
-</section>
+    <section id="main">
+        <div class="container">
+            <article id="main-col">
+                <h1 class="titulo">Serviços</h1>
+                <ul id="servicos">
+                    <li>
+                        <h3>Jogos Unity</h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima nulla consequuntur adipisci atque illo, cumque placeat, exercitationem qui harum deserunt, ab quae! Est necessitatibus vero quisquam similique placeat.</p>
+                        <p>Preços: 1000&euro; - 3000&euro;</p>
+                    </li>
+                    <li>
+                        <h3>Unreal Engine</h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima nulla consequuntur adipisci atque illo, cumque placeat, exercitationem qui harum deserunt, ab quae! Est necessitatibus vero quisquam similique placeat.</p>
+                        <p>Preços: 1000&euro; - 3000&euro;</p>
+                    </li>
+                    <li>
+                        <h3>Personagens</h3>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima nulla consequuntur adipisci atque illo, cumque placeat, exercitationem qui harum deserunt, ab quae! Est necessitatibus vero quisquam similique placeat.</p>
+                        <p>Preços: 1000&euro; - 3000&euro;</p>
+                    </li>
+                </ul>
+            </article>
 
-@section Scripts{
-    <script type="text/javascript">
-        document.querySelector('#servicos').className = 'selecionado';
-    </script>
-}
+            <aside id="sidebar">
+                <div class="dark">
+                    <h3>Peça um orçamento</h3>
+                    <form asp-action="Servicos" class="orcamento">
+                        <div>
+                            <input asp-for="Nome" type="text" placeholder="Nome">
+                            <label asp-for="Nome"></label>
+                        </div>
+                        <div>
+                            <input asp-for="Email" type="email" placeholder="Endereço de email">
+                            <label asp-for="Email"></label>
+                        </div>
+                        <div>
+                            <label asp-for="Mensagem">Mensagem</label><br>
+                            <textarea asp-for="Mensagem" placeholder="Mensagem"></textarea>
+                        </div>
+                        <button class="button_1" type="submit">Enviar</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    @section Scripts{
+        <script type="text/javascript">
+            document.querySelector('#servicos').className = 'selecionado';
+        </script>
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
