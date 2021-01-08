@@ -30,6 +30,24 @@ namespace GlobalGames.Controllers
             return View();
         }
 
+        public IActionResult Inscricoes()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Inscricoes([Bind("Id,Nome,Apelido,Morada,Localidade,Cc,DataNascimento")] Inscricao inscricao)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(inscricao);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Inscricoes));
+            }
+            return View(inscricao);
+        }
+
         public IActionResult Servicos()
         {
             return View();
@@ -47,7 +65,6 @@ namespace GlobalGames.Controllers
             }
             return View(orcamento);
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,0 +1,54 @@
+﻿@model GlobalGames.Dados.Entidades.Inscricao;
+
+@{
+    ViewData["Title"] = "Inscrições";
+}
+
+<section id="main">
+    <div class="container">
+        <div class="dark">
+            <h3>Peça um orçamento</h3>
+            <form asp-action="Inscricoes" class="orcamento">
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Apelido" class="control-label"></label>
+                    <input asp-for="Apelido" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Morada" class="control-label"></label>
+                    <input asp-for="Morada" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Localidade" class="control-label"></label>
+                    <input asp-for="Localidade" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cc" class="control-label">Nº ID Civil</label>
+                    <input asp-for="Cc" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataNascimento" class="control-label">Data de Nascimento</label>
+                    <input asp-for="DataNascimento" class="form-control" />
+                </div>
+                <button id="botao" class="button_1" type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+        document.querySelector('#inscricoes').className = 'selecionado';
+
+        const button = document.querySelector('#botao');
+
+        button.addEventListener("click", function () {
+            alert("Inscrição efetuada com sucesso!");
+        });
+
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
