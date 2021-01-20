@@ -8,6 +8,7 @@ using GlobalGames.Models;
 using Microsoft.EntityFrameworkCore;
 using GlobalGames.Dados;
 using GlobalGames.Dados.Entidades;
+using System.IO;
 
 namespace GlobalGames.Controllers
 {
@@ -37,15 +38,47 @@ namespace GlobalGames.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Inscricoes([Bind("Id,Nome,Apelido,Morada,Localidade,Cc,DataNascimento")] Inscricao inscricao)
+        public async Task<IActionResult> Inscricoes([Bind("Id,Nome,ImageFile,Apelido,Morada,Localidade,Cc,DataNascimento")] FotoViewModel view)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(inscricao);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Inscricoes));
+                var path = string.Empty;
+                if (view.ImageFile != null && view.ImageFile.Length > 0)
+                {
+
+                    path = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Fotos",
+                        view.ImageFile.FileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await view.ImageFile.CopyToAsync(stream);
+                    }
+
+                    path = $"~/images/Products/{view.ImageFile.FileName}";
+                }
+
+                var product = this.ToFoto(view, path);
+                return RedirectToAction(nameof(Index));
             }
-            return View(inscricao);
+
+            return View(view);
+        }
+
+        private Inscricao ToFoto(FotoViewModel view, string path)
+        {
+            return new Inscricao
+            {
+                Id = view.Id,
+                UrlDaImagem = path,
+                Nome = view.Nome,
+                Apelido = view.Apelido,
+                Morada = view.Morada,
+                Localidade = view.Localidade,
+                Cc = view.Cc,
+                DataNascimento = view.DataNascimento
+            };
         }
 
         public IActionResult Servicos()

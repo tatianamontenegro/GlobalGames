@@ -14,6 +14,9 @@ namespace GlobalGames.Dados.Entidades
 
         public string Apelido { get; set; }
 
+        [Display(Name = "Imagem")]
+        public string UrlDaImagem { get; set; }
+
         public string Morada { get; set; }
 
         public string Localidade { get; set; }
