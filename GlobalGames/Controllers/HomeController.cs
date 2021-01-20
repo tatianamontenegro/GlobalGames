@@ -58,7 +58,7 @@ namespace GlobalGames.Controllers
                         await view.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/{view.ImageFile.FileName}";
+                    path = $"~/images/Fotos/{file}";
                 }
 
                 var product = this.ToFoto(view, path);
