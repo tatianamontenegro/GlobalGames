@@ -26,5 +26,7 @@ namespace GlobalGames.Dados.Entidades
 
         [Display(Name = "Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
+
+        public User User { get; set; }
     }
 }

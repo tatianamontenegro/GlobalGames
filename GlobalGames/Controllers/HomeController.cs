@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using GlobalGames.Models;
 using Microsoft.EntityFrameworkCore;
 using GlobalGames.Dados;
 using GlobalGames.Dados.Entidades;
+using GlobalGames.Helpers;
 using System.IO;
 
 namespace GlobalGames.Controllers
@@ -62,6 +64,7 @@ namespace GlobalGames.Controllers
                 }
 
                 var product = this.ToFoto(view, path);
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -79,7 +82,8 @@ namespace GlobalGames.Controllers
                 Morada = view.Morada,
                 Localidade = view.Localidade,
                 Cc = view.Cc,
-                DataNascimento = view.DataNascimento
+                DataNascimento = view.DataNascimento,
+                User = view.User
             };
         }
 
