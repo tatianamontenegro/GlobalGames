@@ -24,12 +24,6 @@
             @Html.DisplayFor(model => model.Apelido)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UrlDaImagem)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UrlDaImagem)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.Morada)
         </dt>
         <dd>
@@ -54,7 +48,7 @@
             @Html.DisplayFor(model => model.DataNascimento)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |

@@ -17,19 +17,21 @@ namespace GlobalGames.Controllers
 {
     public class InscricoesController : Controller
     {
+        private readonly DataContext _context;
         private readonly IInscricaoRepository inscricaoRepository;
         private readonly IUserHelper userHelper;
 
-        public InscricoesController(IInscricaoRepository inscricaoRepository, IUserHelper userHelper)
+        public InscricoesController(DataContext context, IInscricaoRepository inscricaoRepository, IUserHelper userHelper)
         {
+            _context = context;
             this.inscricaoRepository = inscricaoRepository;
             this.userHelper = userHelper;
         }
 
         // GET: Inscricoes
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(this.inscricaoRepository.GetAll());
+            return View(await _context.Inscricoes.ToListAsync());
         }
 
         [Authorize]
@@ -41,7 +43,9 @@ namespace GlobalGames.Controllers
                 return NotFound();
             }
 
-            var inscricao = await this.inscricaoRepository.GetByIdAsync(id.Value);
+            var inscricao = await _context.Inscricoes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            inscricao = await this.inscricaoRepository.GetByIdAsync(id.Value);
             if (inscricao == null)
             {
                 return NotFound();
@@ -87,6 +91,8 @@ namespace GlobalGames.Controllers
 
                 var inscricao = this.ToFoto(view, path);
 
+                _context.Add(inscricao);
+                await _context.SaveChangesAsync();
                 inscricao.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.inscricaoRepository.CreateAsync(inscricao);
                 return RedirectToAction(nameof(Index));
@@ -188,7 +194,8 @@ namespace GlobalGames.Controllers
                 return NotFound();
             }
 
-            var inscricao = await this.inscricaoRepository.GetByIdAsync(id.Value);
+            var inscricao = await _context.Inscricoes.FindAsync(id);
+            inscricao = await this.inscricaoRepository.GetByIdAsync(id.Value);
             if (inscricao == null)
             {
                 return NotFound();
@@ -212,6 +219,8 @@ namespace GlobalGames.Controllers
             {
                 try
                 {
+                    _context.Update(inscricao);
+                    await _context.SaveChangesAsync();
                     await this.inscricaoRepository.UpdateAsync(inscricao);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -238,7 +247,9 @@ namespace GlobalGames.Controllers
                 return NotFound();
             }
 
-            var inscricao = await this.inscricaoRepository.GetByIdAsync(id.Value);
+            var inscricao = await _context.Inscricoes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            inscricao = await this.inscricaoRepository.GetByIdAsync(id.Value);
             if (inscricao == null)
             {
                 return NotFound();
@@ -252,9 +263,15 @@ namespace GlobalGames.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var inscricao = await this.inscricaoRepository.GetByIdAsync(id);
-            await this.inscricaoRepository.DeleteAsync(inscricao);
+            var inscricao = await _context.Inscricoes.FindAsync(id);
+            _context.Inscricoes.Remove(inscricao);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool InscricaoExists(int id)
+        {
+            return _context.Inscricoes.Any(e => e.Id == id);
         }
 
     }

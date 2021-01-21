@@ -64,7 +64,8 @@ namespace GlobalGames.Controllers
                 }
 
                 var inscricao = this.ToFoto(view, path);
-
+                _context.Add(inscricao);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
