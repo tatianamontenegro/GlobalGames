@@ -63,7 +63,7 @@ namespace GlobalGames.Controllers
                     path = $"~/images/Fotos/{file}";
                 }
 
-                var product = this.ToFoto(view, path);
+                var inscricao = this.ToFoto(view, path);
 
                 return RedirectToAction(nameof(Index));
             }

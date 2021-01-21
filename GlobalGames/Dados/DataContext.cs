@@ -10,6 +10,8 @@ namespace GlobalGames.Dados
         public DbSet<Orcamento> Orcamentos { get; set; }
         public DbSet<Inscricao> Inscricoes { get; set; }
 
+        public DbSet<Country> Countries { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 

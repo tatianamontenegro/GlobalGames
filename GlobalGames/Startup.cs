@@ -50,6 +50,8 @@ namespace GlobalGames
             services.AddTransient<SeedDb>();
 
             services.AddScoped<IUserHelper, UserHelper>();
+            services.AddScoped<IInscricaoRepository, InscricaoRepository>();
+            services.AddScoped<ICountryRepository, CountryRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

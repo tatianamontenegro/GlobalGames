@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GlobalGames.Dados.Entidades
 {
-    public class Inscricao
+    public class Inscricao : IEntity
     {
         public int Id { get; set; }
 

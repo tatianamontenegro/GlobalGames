@@ -44,6 +44,25 @@ namespace GlobalGames.Dados
                 }
             }
 
+            if (!this.context.Inscricoes.Any())
+            {
+                this.AddInscricao("Afonso Tobias", user);
+                this.AddInscricao("Carlota Charrua", user);
+                this.AddInscricao("Ana Pipoca", user);
+                this.AddInscricao("Jonas Pistolas", user);
+                this.AddInscricao("Cláudio Varela", user);
+                await this.context.SaveChangesAsync();
+            }
+        }
+
+        private void AddInscricao(string name, User user)
+        {
+            this.context.Inscricoes.Add(new Inscricao
+            {
+                Nome = name,
+                Cc = this.random.Next(0, 9).ToString(),
+                User = user
+            });
         }
 
     }

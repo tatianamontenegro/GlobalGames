@@ -28,7 +28,7 @@
                     <li id="inscricoes"><a asp-area="" asp-controller="Home" asp-action="Inscricoes">Inscrições</a></li>
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                        <li><a a href="#">@this.User.Identity.Name</a></li>
+                        <li><a asp-area="" asp-controller="Inscricoes" asp-action="Index">@this.User.Identity.Name</a></li>
                         <li id="user"><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
 
                     }
